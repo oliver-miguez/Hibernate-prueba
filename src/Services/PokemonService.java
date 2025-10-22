@@ -67,9 +67,9 @@ public class PokemonService {
 
     public List<PokemonModel> listarPokemon() {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
-            return session.createQuery("from Gatos", PokemonModel.class).getResultList();
+            return session.createQuery("from PokemonModel", PokemonModel.class).getResultList();
         } catch (Exception e) {
-            System.out.println("Erro ao lista-los gatos: " + e.getMessage());
+            System.out.println("Erro ao lista-los pokemons: " + e.getMessage());
             return null;
         }
     }

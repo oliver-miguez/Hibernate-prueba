@@ -58,9 +58,9 @@ public class PokedexService {
 
     public List<PokedexModel> listarPokedex() {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
-            return session.createQuery("from Gatos", PokedexModel.class).getResultList();
+            return session.createQuery("from PokedexModel", PokedexModel.class).getResultList();
         } catch (Exception e) {
-            System.out.println("Erro ao lista-los gatos: " + e.getMessage());
+            System.out.println("Erro ao lista-las pokedex: " + e.getMessage());
             return null;
         }
     }

@@ -50,7 +50,19 @@ public class Main {
         pokemon.crearPokemon("whismur",new java.util.Date(2001-8-15),10,2);
         pokemon.crearPokemon("Pikachu",new java.util.Date(2002-3-3),12,2);
 */
-
+        System.out.println("____________________");
+        for(PokemonModel pokemonModel: pokemon.listarPokemon()){
+            System.out.println(pokemonModel);
+        }
+        System.out.println("____________________");
+        for(PokedexModel pokedexModel: pokedex.listarPokedex()){
+            System.out.println(pokedexModel);
+        }
+        System.out.println("____________________");
+        for (AdestradorModel adestradorModel: adestrador.listarAdestrador()){
+            System.out.println(adestradorModel);
+        }
+        System.out.println("____________________");
 
 
     }
