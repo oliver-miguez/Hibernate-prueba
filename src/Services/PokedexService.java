@@ -4,9 +4,11 @@ import Config.HibernateConfig;
 import Model.PokedexModel;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class PokedexService {
+public class PokedexService implements Serializable {
 
     public void crearPokedex(String nome, double peso, String misc ) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
