@@ -6,6 +6,11 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+/**
+ * CONFIGURACIONES DE HIBERNATE (OBLIGATORIO)
+ * OJO, TENER EN CUENTA CAMBIAR EL VALOR DEL "standardServiceRegistry" A LA RUTA DE NUESTRO ARCHIVO "properties.xml"
+ * EL RESTO SE PUEDE REUTILIZAR
+ */
 public class HibernateConfig {
 
     private static StandardServiceRegistry standardServiceRegistry;

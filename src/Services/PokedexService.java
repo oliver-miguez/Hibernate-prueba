@@ -33,13 +33,25 @@ public class PokedexService implements Serializable {
         }
     }
 
-    public void actualizarPokedex(PokedexModel pokedex) {
+    public void actualizarCamposPokedex(int id, String nuevoNombre, double nuevoPeso, String nuevoMisc) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.update(pokedex);
+
+            // Obtener la entrada específica por ID
+            PokedexModel pokedex = session.get(PokedexModel.class, id);
+
+            // Cambiar solo los campos que quieres
+            if (pokedex != null) {
+                pokedex.setNome(nuevoNombre);
+                pokedex.setPeso(nuevoPeso);
+                pokedex.setMisc(nuevoMisc);
+                // Hibernate detectará los cambios y actualizará solo esos campos
+                session.update(pokedex);
+            }
+
             transaction.commit();
         } catch (Exception e) {
-            System.out.println("Erro ao actualiza-lo pokedex: " + e.getMessage());
+            System.out.println("Error al actualizar la pokedex: " + e.getMessage());
         }
     }
 

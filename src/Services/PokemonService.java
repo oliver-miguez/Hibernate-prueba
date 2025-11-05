@@ -40,10 +40,18 @@ public class PokemonService {
         }
     }
 
-    public void actualizarPokemon(PokemonModel pokemon) {
+    public void actualizarPokemon(int id,String novoNome, Date novoNacemento) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.update(pokemon);
+
+                // Obtener la entrada específica por ID
+            PokemonModel pokemon = session.get(PokemonModel.class, id);
+
+            if (pokemon != null) {
+                pokemon.setNome(novoNome);
+                pokemon.setNacemento(novoNacemento);
+                session.update(pokemon);
+            }
             transaction.commit();
         } catch (Exception e) {
             System.out.println("Erro ao actualiza-lo pokemon: " + e.getMessage());

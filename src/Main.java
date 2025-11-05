@@ -5,20 +5,20 @@ import Serialización.Serial;
 import Services.AdestradorService;
 import Services.PokedexService;
 import Services.PokemonService;
+import XML.AdestradorXML;
+import XML.LeerXML;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
     public static void main(String[] args) {
 
         //INSTANCIA DE SERVICIOS
         AdestradorService adestrador = new AdestradorService();
         PokedexService pokedex = new PokedexService();
         PokemonService pokemon = new PokemonService();
-
 
         //CREAR
         adestrador.crearAdestrador("Ramon", new Date(1600-3-12));
@@ -69,16 +69,54 @@ public class Main {
         System.out.println("____________________");
 
         // Serialización
+        List<PokedexModel>pokedexSerializar = new ArrayList<>();
+        pokedexSerializar.add(pokedex.leerPokedex(1));
+        pokedexSerializar.add(pokedex.leerPokedex(2));
 
-        Serial.serializar(pokedex.leerPokedex(1));
+        Serial.serializarPokedex(pokedexSerializar);
 
-        ArrayList<PokedexModel>pokedexModels = Serial.deserializar();
-        for(PokedexModel p : pokedexModels){
-            System.out.println(p);
+        //Deserializar
+        Serial.deserializar();
+
+        //XML ESCRIBIR
+        AdestradorXML.XMLAdestrador(adestrador.listarAdestrador());
+
+        // Actualizar Entradas
+        pokedex.actualizarCamposPokedex(1,"Paco",1000,"Esto fué actualizado");
+        pokedex.actualizarCamposPokedex(2,"Pepe", 20000,"Esto fué actualizado");
+
+        adestrador.actualizarAdestrador(1,"AlbertoActualizacion",new Date(1000-10-10));
+        adestrador.actualizarAdestrador(2,"PaquiñoActualizacion",new Date(1000-10-10));
+
+        pokemon.actualizarPokemon(1,"Pocoyó",new java.util.Date(1111-11-11));
+        pokemon.actualizarPokemon(2,"Pocoyó",new java.util.Date(1111-11-11));
+        pokemon.actualizarPokemon(3,"Pocoyó",new java.util.Date(1111-11-11));
+        pokemon.actualizarPokemon(4,"Pocoyó",new java.util.Date(1111-11-11));
+
+        //Listar
+        List<PokedexModel>pokedexModels = pokedex.listarPokedex();
+        for(PokedexModel pokedexModel: pokedexModels){
+            System.out.println(pokedexModel);
         }
 
+        List<PokemonModel>pokemonModels = pokemon.listarPokemon();
+        for(PokemonModel pokemonModel: pokemonModels){
+            System.out.println(pokemonModel);
+        }
+
+        List<AdestradorModel> adestradorModels = adestrador.listarAdestrador();
+        for(AdestradorModel adestradorModel : adestradorModels){
+            System.out.println(adestradorModel);
+        }
+
+        //Recuperar
+        List<PokedexModel>pokedexModels1 = Serial.deserializar();
+        for(PokedexModel pokedexModel : pokedexModels1){
+            pokedex.actualizarCamposPokedex(pokedexModel.getId(),pokedexModel.getNome(),pokedexModel.getPeso(),pokedexModel.getMisc());
+        }
+
+        // Leer XML
+        LeerXML.leerXML();
+
     }
-
-
-
 }

@@ -5,34 +5,33 @@ import Model.PokemonModel;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Serial {
-    public static void serializar(PokedexModel pokedexModel){
+    /**
+     * Serializa la pokedex
+     */
+    public static void serializarPokedex(List<PokedexModel> pokedexModels){
         try {
-
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Serializar.txt"));
-            oos.writeObject(pokedexModel);
+            oos.writeObject(pokedexModels);
+
         } catch (IOException e) {
-            System.out.println("Error serializando pokedex: "+e.getMessage());
+            System.out.println("Error al serializar: "+e.getMessage());
         }
     }
 
-    public static ArrayList<PokedexModel> deserializar(){
-        ArrayList<PokedexModel> pokedexs= new ArrayList<>();
-        try {
+    public static List<PokedexModel> deserializar(){
+        List<PokedexModel> pokedexModels = new ArrayList<>();
+        try{
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Serializar.txt"));
-            Model.PokedexModel pokedexModels = (PokedexModel) ois.readObject();
-            while (pokedexModels != null){
-                pokedexs.add(pokedexModels);
-            }
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Archivo non encontrado: "+e.getMessage());
+            pokedexModels = (List<PokedexModel>) ois.readObject();
+            System.out.println(pokedexModels);
         } catch (IOException e) {
-            System.out.println("Error entrada/saida: "+e.getMessage());
+            System.out.println("Error al deserializar");
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("Objeto al deserializar no encontrado");
         }
-        return pokedexs;
+        return pokedexModels;
     }
 }

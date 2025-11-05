@@ -1,7 +1,5 @@
 package Model;
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
 @Entity
 @Table(name = "adestrador")
