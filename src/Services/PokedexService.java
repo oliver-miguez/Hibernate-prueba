@@ -10,6 +10,12 @@ import java.util.List;
 
 public class PokedexService implements Serializable {
 
+    /**
+     * Crea pokedex
+     * @param nome nombre para pokedex
+     * @param peso peso de cada pokemon de la pokedex
+     * @param misc descripcion
+     */
     public void crearPokedex(String nome, double peso, String misc ) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -24,6 +30,11 @@ public class PokedexService implements Serializable {
         }
     }
 
+    /**
+     * Lee pokedexs en base a su id
+     * @param id del pokedex
+     * @return los datos del pokedex
+     */
     public PokedexModel leerPokedex(int id) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             return session.get(PokedexModel.class, id);
@@ -33,6 +44,13 @@ public class PokedexService implements Serializable {
         }
     }
 
+    /**
+     * Actualiza los datos de una pokedex con base en su id
+     * @param id del pokedex 
+     * @param nuevoNombre  de la pokedex
+     * @param nuevoPeso de la pokedex
+     * @param nuevoMisc de la pokedex
+     */
     public void actualizarCamposPokedex(int id, String nuevoNombre, double nuevoPeso, String nuevoMisc) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -55,6 +73,10 @@ public class PokedexService implements Serializable {
         }
     }
 
+    /**
+     *  Elimina la pokedex con un id específico
+     * @param id de la pokedex a borrar
+     */
     public void eliminarPokedex(int id) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -70,6 +92,10 @@ public class PokedexService implements Serializable {
         }
     }
 
+    /**
+     * Lista todas las pokedex
+     * @return una lista de todos los valores de la pokedex
+     */
     public List<PokedexModel> listarPokedex() {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             return session.createQuery("from PokedexModel", PokedexModel.class).getResultList();

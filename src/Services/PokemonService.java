@@ -11,7 +11,13 @@ import java.util.Date;
 import java.util.List;
 
 public class PokemonService {
-
+    /**
+     * Crea un pokemon con estos datos
+     * @param nome nombre del pokemon
+     * @param nacemento fecha de nacimiento del pokemon
+     * @param pokedexentry numero de pokedex
+     * @param adestrador adestrador del pokemon
+     */
     public void crearPokemon(String nome, Date nacemento, int pokedexentry, int adestrador) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -31,6 +37,11 @@ public class PokemonService {
         }
     }
 
+    /**
+     * Lee el pokemon según el id
+     * @param id del pokemon
+     * @return los valores del pokemon que se lee
+     */
     public PokemonModel leerPokemon(int id) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             return session.get(PokemonModel.class, id);
@@ -40,6 +51,12 @@ public class PokemonService {
         }
     }
 
+    /**
+     * Actualiza un pokemon
+     * @param id el pokemon a actualizar
+     * @param novoNome novo nome
+     * @param novoNacemento nova fecha de nacemento
+     */
     public void actualizarPokemon(int id,String novoNome, Date novoNacemento) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -58,6 +75,10 @@ public class PokemonService {
         }
     }
 
+    /**
+     * Elimina el pokemon según su id
+     * @param id del pokemon
+     */
     public void eliminarPokemon(int id) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -73,6 +94,10 @@ public class PokemonService {
         }
     }
 
+    /**
+     * Lista todos los pokemon
+     * @return una lista de todos lo pokemon
+     */
     public List<PokemonModel> listarPokemon() {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             return session.createQuery("from PokemonModel", PokemonModel.class).getResultList();

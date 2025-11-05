@@ -1,6 +1,11 @@
 package Model;
 import javax.persistence.*;
 import java.sql.Date;
+
+/**
+ * Model de adestrador
+ */
+
 @Entity
 @Table(name = "adestrador")
 public class AdestradorModel {

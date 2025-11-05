@@ -2,6 +2,9 @@ package Model;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Model de pokedex
+ */
 
 @Entity
 @Table(name = "pokedex")

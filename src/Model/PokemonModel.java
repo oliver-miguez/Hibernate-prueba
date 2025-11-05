@@ -3,6 +3,10 @@ package Model;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * Model de pokemon
+ */
+
 @Entity
 @Table(name = "pokemon")
 public class PokemonModel {

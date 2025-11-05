@@ -10,6 +10,11 @@ import java.util.List;
 
 public class AdestradorService {
 
+    /**
+     * Crea un adestrador con un nombre y una fecha de nacimiento
+     * @param nome del adestrador
+     * @param nacemento del adestrador
+     */
     public void crearAdestrador(String nome, Date nacemento ) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -23,6 +28,11 @@ public class AdestradorService {
         }
     }
 
+    /**
+     * Lee los adestradores en base a su id
+     * @param id del adestrador
+     * @return el adestrador con sus valores
+     */
     public AdestradorModel lerAdestrador(int id) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             return session.get(AdestradorModel.class, id);
@@ -32,6 +42,12 @@ public class AdestradorService {
         }
     }
 
+    /**
+     * Actualiza el nombre y la fecha de nacimiento del adestrador
+     * @param id de cada adestrador
+     * @param nome de cada adestrador
+     * @param nacemento de cada adestrador
+     */
     public void actualizarAdestrador(int id, String nome, Date nacemento) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -48,6 +64,7 @@ public class AdestradorService {
             System.out.println("Erro ao actualiza-lo Adestrador: " + e.getMessage());
         }
     }
+
 
     public void actualizarAdestador(AdestradorModel adestrador) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
@@ -74,6 +91,10 @@ public class AdestradorService {
         }
     }
 
+    /**
+     * Listar todos los adestradores
+     * @return una lista de todos los adestradores que existen
+     */
     public List<AdestradorModel> listarAdestrador() {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
             return session.createQuery("from AdestradorModel", AdestradorModel.class).getResultList();
