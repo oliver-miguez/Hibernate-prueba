@@ -21,6 +21,10 @@ public class Serial {
         }
     }
 
+    /**
+     * Deserializa la pokedex
+     * @return los datos anteriormente serializados en el archivo de la pokedex
+     */
     public static List<PokedexModel> deserializar(){
         List<PokedexModel> pokedexModels = new ArrayList<>();
         try{

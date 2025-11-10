@@ -12,7 +12,7 @@ import java.util.Date;
 public class PokemonModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // crear id automáticamente
     int id;
 
     @Column(name = "nome")
